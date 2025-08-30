@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe AI - Ultimate Challenge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" data-section="home-section">
+                <span class="logo-icon">🎯</span>
+                Tic-Tac-Toe AI
+            </a>
+            <ul class="nav-links">
+                <li><a href="#" class="active" data-section="home-section">Home</a></li>
+                <li><a href="#" data-section="game-section">Play Game</a></li>
+                <li><a href="#" data-section="history-section">History</a></li>
+                <li><a href="#" data-section="about-section">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home-section" class="section active">
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">🎯 Tic-Tac-Toe AI Challenge</h1>
+                    <p class="hero-subtitle">Test your skills against an unbeatable AI opponent!</p>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">🏆</div>
+                            <div class="stat-number" id="wins">0</div>
+                            <div class="stat-label">Your Wins</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🤖</div>
+                            <div class="stat-number" id="aiWins">0</div>
+                            <div class="stat-label">AI Wins</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">🤝</div>
+                            <div class="stat-number" id="draws">0</div>
+                            <div class="stat-label">Draws</div>
+                        </div>
+                    </div>
+
+                    <div class="game-launcher">
+                        <div class="launcher-card" id="startGameBtn">
+                            <div class="launcher-icon">🎮</div>
+                            <h3>Start New Game</h3>
+                            <p>Challenge the unbeatable AI!</p>
+                        </div>
+                    </div>
+
+                    <div class="motivation">
+                        <h3>🔥 Current Streak</h3>
+                        <div class="streak-display">
+                            <span class="streak-label">Your Wins:</span>
+                            <span class="streak-count" id="currentStreak">0</span>
+                        </div>
+                        <p class="motivation-text" id="motivationText">Ready to challenge the AI? Let's go!</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Section (Popup Style) -->
+        <section id="game-section" class="section">
+            <div class="game-popup">
+                <div class="popup-header">
+                    <h2>🎯 Tic-Tac-Toe Challenge</h2>
+                    <button class="close-btn" id="closeGameBtn">×</button>
+                </div>
+                
+                <div class="game-container">
+                    <div class="game-sidebar">
+                        <div class="game-info" id="gameInfo">
+                            Your turn! You are X
+                        </div>
+
+                        <div id="message" class="message" style="display: none;"></div>
+
+                        <div class="controls">
+                            <button class="reset-btn">New Game</button>
+                        </div>
+                    </div>
+                    
+                    <div class="game-main">
+                        <div class="board" id="board">
+                            <div class="cell" data-row="0" data-col="0"></div>
+                            <div class="cell" data-row="0" data-col="1"></div>
+                            <div class="cell" data-row="0" data-col="2"></div>
+                            <div class="cell" data-row="1" data-col="0"></div>
+                            <div class="cell" data-row="1" data-col="1"></div>
+                            <div class="cell" data-row="1" data-col="2"></div>
+                            <div class="cell" data-row="2" data-col="0"></div>
+                            <div class="cell" data-row="2" data-col="1"></div>
+                            <div class="cell" data-row="2" data-col="2"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- History Section -->
+        <section id="history-section" class="section">
+            <div class="history-section">
+                <h2 class="history-title">📊 Game History</h2>
+                
+                <div class="history-stats">
+                    <div class="history-stat">
+                        <span class="stat-value" id="totalGames">0</span>
+                        <span class="stat-label">Total Games</span>
+                    </div>
+                    <div class="history-stat">
+                        <span class="stat-value" id="winPercentage">0%</span>
+                        <span class="stat-label">Win Rate</span>
+                    </div>
+                    <div class="history-stat">
+                        <span class="stat-value" id="bestStreak">0</span>
+                        <span class="stat-label">Best Streak</span>
+                    </div>
+                </div>
+
+                <div class="history-list" id="historyList">
+                    <p class="empty-history">No games played yet. Start playing to see your history!</p>
+                </div>
+
+                <button class="clear-history-btn" id="clearHistoryBtn">Clear History</button>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about-section" class="section">
+            <div class="about-section">
+                <h2 class="about-title">About Tic-Tac-Toe AI</h2>
+                
+                <div class="about-content">
+                    <p>
+                        Welcome to the ultimate Tic-Tac-Toe challenge! This application features an unbeatable AI opponent 
+                        powered by the Minimax algorithm with Alpha-Beta pruning. Test your skills against one of the most 
+                        sophisticated game-playing algorithms in computer science.
+                    </p>
+
+                    <div class="features-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">🤖</div>
+                            <h3>Unbeatable AI</h3>
+                            <p>Powered by Minimax algorithm with Alpha-Beta pruning for optimal gameplay</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">🎨</div>
+                            <h3>Beautiful Design</h3>
+                            <p>Modern, responsive interface with smooth animations and professional styling</p>
+                        </div>
+                        
+                        <div class="feature-card">
+                            <div class="feature-icon">⚡</div>
+                            <h3>Real-time Play</h3>
+                            <p>Instant responses and seamless gameplay experience</p>
+                        </div>
+                    </div>
+
+                    <div class="tech-stack">
+                        <h3>Technology Stack</h3>
+                        <div class="tech-list">
+                            <span class="tech-item">Flask</span>
+                            <span class="tech-item">Python</span>
+                            <span class="tech-item">JavaScript</span>
+                            <span class="tech-item">CSS3</span>
+                            <span class="tech-item">HTML5</span>
+                            <span class="tech-item">Minimax Algorithm</span>
+                        </div>
+                    </div>
+
+                    <div class="game-rules">
+                        <h3>How to Play</h3>
+                        <ul style="list-style: none; padding: 0; margin: 1rem 0;">
+                            <li>🎯 You play as <strong>X</strong> and the AI plays as <strong>O</strong></li>
+                            <li>🚀 Click on any empty cell to make your move</li>
+                            <li>🤖 The AI will automatically respond with its optimal move</li>
+                            <li>🏆 First to get three in a row wins!</li>
+                            <li>🤝 Game ends in a draw if all cells are filled</li>
+                        </ul>
+                    </div>
+
+                    <div class="learning-objectives">
+                        <h3>Learning Objectives</h3>
+                        <p>
+                            This project demonstrates key concepts in artificial intelligence, game theory, and web development, 
+                            including search algorithms, optimization techniques, and real-time web applications.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2024 Tic-Tac-Toe AI Challenge. Built with ❤️ using Flask and modern web technologies.</p>
+        </div>
+    </footer>
+
+    <!-- Confetti Container -->
+    <div id="confetti-container"></div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
